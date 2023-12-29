@@ -15,7 +15,7 @@ function SuperHeroes() {
       const response = await axios.get("http://localhost:4000/super-heroes");
       return response.data;
     },
-    { cacheTime: 5000 }
+    { staleTime: 30000 }
   );
   console.log(
     "🚀 ~ file: index.tsx:13 ~ SuperHeroes ~ isFetching:",
