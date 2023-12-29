@@ -9,13 +9,15 @@ interface Superhero {
 }
 
 function SuperHeroes() {
-  const { isLoading, data, error, isError, isFetching } = useQuery<Superhero[]>(
+  const { isLoading, data, error, isError, isFetching, refetch } = useQuery<
+    Superhero[]
+  >(
     "super-heroes",
     async () => {
       const response = await axios.get("http://localhost:4000/super-heroes");
       return response.data;
     },
-    { refetchInterval: 5000, refetchIntervalInBackground: true }
+    { enabled: false }
   );
   console.log(
     "🚀 ~ file: index.tsx:13 ~ SuperHeroes ~ isFetching:",
@@ -37,6 +39,7 @@ function SuperHeroes() {
         <h2>{error.message}</h2>
       ) : (
         <section>
+          <button onClick={refetch}>Fetch Heroes</button>
           {data?.map((hero) => (
             <p key={hero.id}>{hero.name}</p>
           ))}
