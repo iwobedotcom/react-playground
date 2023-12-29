@@ -8,25 +8,24 @@ interface Superhero {
   alterEgo: string;
 }
 
+const querySuperHeroes = async () => {
+  const response = await axios.get("http://localhost:4000/super-heroes");
+  return response.data;
+};
+
 function SuperHeroes() {
-  const { isLoading, data, error, isError, isFetching, refetch } = useQuery<
-    Superhero[]
-  >(
+  const onSuccess = (data: Superhero[]) => {
+    console.log("🚀 ~ file: index.tsx:18 ~ onSuccess ~ data:", data);
+  };
+
+  const onError = (error: any) => {
+    console.log("🚀 ~ file: index.tsx:22 ~ onError ~ error:", error);
+  };
+
+  const { data, isLoading, isError, error } = useQuery<Superhero[]>(
     "super-heroes",
-    async () => {
-      const response = await axios.get("http://localhost:4000/super-heroes");
-      return response.data;
-    },
-    { enabled: false }
-  );
-  console.log(
-    "🚀 ~ file: index.tsx:13 ~ SuperHeroes ~ isFetching:",
-    isFetching
-  );
-  console.log("🚀 ~ file: index.tsx:13 ~ SuperHeroes ~ isLoading:", isLoading);
-  console.log(
-    "🚀 ~ file: index.tsx:10 ~ const{isLoading,data}=useQuery ~ data:",
-    data
+    querySuperHeroes,
+    { onSuccess, onError }
   );
 
   return (
@@ -39,7 +38,6 @@ function SuperHeroes() {
         <h2>{error.message}</h2>
       ) : (
         <section>
-          <button onClick={refetch}>Fetch Heroes</button>
           {data?.map((hero) => (
             <p key={hero.id}>{hero.name}</p>
           ))}
