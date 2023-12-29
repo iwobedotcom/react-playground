@@ -9,13 +9,19 @@ interface Superhero {
 }
 
 function SuperHeroes() {
-  const { isLoading, data, error, isError } = useQuery<Superhero[]>(
+  const { isLoading, data, error, isError, isFetching } = useQuery<Superhero[]>(
     "super-heroes",
     async () => {
       const response = await axios.get("http://localhost:4000/super-heroes");
       return response.data;
-    }
+    },
+    { cacheTime: 5000 }
   );
+  console.log(
+    "🚀 ~ file: index.tsx:13 ~ SuperHeroes ~ isFetching:",
+    isFetching
+  );
+  console.log("🚀 ~ file: index.tsx:13 ~ SuperHeroes ~ isLoading:", isLoading);
   console.log(
     "🚀 ~ file: index.tsx:10 ~ const{isLoading,data}=useQuery ~ data:",
     data
