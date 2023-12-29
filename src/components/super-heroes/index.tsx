@@ -14,18 +14,15 @@ const querySuperHeroes = async () => {
 };
 
 function SuperHeroes() {
-  const onSuccess = (data: Superhero[]) => {
-    console.log("🚀 ~ file: index.tsx:18 ~ onSuccess ~ data:", data);
-  };
-
-  const onError = (error: any) => {
-    console.log("🚀 ~ file: index.tsx:22 ~ onError ~ error:", error);
-  };
-
   const { data, isLoading, isError, error } = useQuery<Superhero[]>(
     "super-heroes",
     querySuperHeroes,
-    { onSuccess, onError }
+    {
+      select: (data) => {
+        const heroNames = data.map((hero: Superhero) => hero.name);
+        return heroNames;
+      },
+    }
   );
 
   return (
@@ -35,11 +32,11 @@ function SuperHeroes() {
       {isLoading ? (
         <h2>Loading...</h2>
       ) : isError ? (
-        <h2>{error.message}</h2>
+        <h2>{error.message || "An error occurred."}</h2>
       ) : (
         <section>
-          {data?.map((hero) => (
-            <p key={hero.id}>{hero.name}</p>
+          {data?.map((heroName: any) => (
+            <p key={heroName}>{heroName}</p>
           ))}
         </section>
       )}
