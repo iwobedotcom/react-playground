@@ -19,9 +19,7 @@ const querySuperHeroesById = async (id: number) => {
 };
 
 export function useSuperHeroesQuery(): UseQueryResult<Superhero[], Error> {
-  return useQuery<Superhero[], Error>("super-heroes", querySuperHeroes, {
-    select: (data) => data,
-  });
+  return useQuery<Superhero[], Error>("super-heroes", querySuperHeroes);
 }
 
 export function useSuperHeroesQueryId(
