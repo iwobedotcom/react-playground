@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery, UseQueryResult } from "react-query";
 
-interface Superhero {
+export interface Superhero {
   id: number;
   name: string;
   alterEgo: string;
@@ -10,14 +10,24 @@ interface Superhero {
 
 const querySuperHeroes = async () => {
   const response = await axios.get("http://localhost:4000/super-heroes");
-  return response.data;
+  return response.data as Superhero[]; // Assert the type here
 };
 
-export function useSuperHeroesQuery() {
-  return useQuery<Superhero[]>("super-heroes", querySuperHeroes, {
-    select: (data) => {
-      const heroNames = data.map((hero: any) => hero.name);
-      return heroNames;
-    },
+const querySuperHeroesById = async (id: number) => {
+  const response = await axios.get(`http://localhost:4000/super-heroes/${id}`);
+  return response.data as Superhero; // Assert the type here
+};
+
+export function useSuperHeroesQuery(): UseQueryResult<Superhero[], Error> {
+  return useQuery<Superhero[], Error>("super-heroes", querySuperHeroes, {
+    select: (data) => data,
   });
+}
+
+export function useSuperHeroesQueryId(
+  id: number
+): UseQueryResult<Superhero, Error> {
+  return useQuery<Superhero, Error>(["super-hero", id], () =>
+    querySuperHeroesById(id)
+  );
 }
