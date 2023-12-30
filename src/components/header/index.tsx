@@ -18,6 +18,9 @@ function Header() {
         <li>
           <NavLink to="/super-heroes">Super Heroes</NavLink>
         </li>
+        <li>
+          <NavLink to="/parallel-query">Parallel Queries</NavLink>
+        </li>
       </nav>
     </header>
   );

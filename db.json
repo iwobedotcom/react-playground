@@ -15,5 +15,19 @@
       "name": "Wonder Woman",
       "alterEgo": "Diana Prince"
     }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "name": "Chun Li"
+    },
+    {
+      "id": 2,
+      "name": "Fred Thompson"
+    },
+    {
+      "id": 3,
+      "name": "Monalisa Chida"
+    }
   ]
 }
