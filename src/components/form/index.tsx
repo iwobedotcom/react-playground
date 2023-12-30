@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { useState } from "react";
 
 function Form() {
@@ -20,19 +20,14 @@ function Form() {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/users",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const customAxiosInstance: AxiosInstance = axios.create({
+        baseURL: "http://localhost:4000",
+      });
 
-      console.log("Response:", data);
+      const response = await customAxiosInstance.post("/users", formData);
 
-      // You can update state or perform other actions based on the response
+      // Handle the response, e.g., log it or update state
+      console.log("Response:", response.data);
     } catch (error) {
       console.error("Error:", error);
     }

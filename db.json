@@ -52,6 +52,21 @@
       "email": "luqaco@mailinator.com",
       "password": "Pa$$w0rd!",
       "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "fullname": "Rigel Miranda",
+      "email": "puzykefem@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "id": 6
     }
   ]
 }
