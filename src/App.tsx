@@ -6,6 +6,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import SuperHero from "./components/super-hero";
 import ParallelQuery from "./components/parallel-query";
+import Form from "./components/form";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/super-heroes" element={<SuperHeroes />} />
             <Route path="/super-heroes/:id" element={<SuperHero />} />
             <Route path="/parallel-query" element={<ParallelQuery />} />
+            <Route path="/form" element={<Form />} />
           </Routes>
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />

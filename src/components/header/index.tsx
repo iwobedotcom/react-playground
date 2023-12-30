@@ -21,6 +21,9 @@ function Header() {
         <li>
           <NavLink to="/parallel-query">Parallel Queries</NavLink>
         </li>
+        <li>
+          <NavLink to="/form">Form</NavLink>
+        </li>
       </nav>
     </header>
   );
